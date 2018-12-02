@@ -77,7 +77,7 @@ CREATE TABLE plays (
 CREATE TABLE rent (
 	primary key (
 		username,
-		rentamt integer),\
+		rentamt integer),
 );
 
 --
