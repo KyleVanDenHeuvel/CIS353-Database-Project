@@ -25,11 +25,11 @@ DROP TABLE rent CASCADE CONSTRAINTS;
 --
 CREATE TABLE players (
 	username	varchar2(15) PRIMARY KEY,
-	bankaccount	
-	gamepiece 
-	password
-	firstname	char(),
-	lastname	char()
+	bankaccount	char,
+	gamepiece 	char,
+	password    	char,
+	firstname	char,
+	lastname	char,
 --
 -- PlIC1: All players must have a unique username
 CONSTRAINT PlIC1 UNIQUE (username),
@@ -38,27 +38,27 @@ CONSTRAINT PlIC1 UNIQUE (username),
 );
 --
 CREATE TABLE game (
-	gameID
-	gamerules
-	playersingame
+	gameID		integer
+	gamerules	char
+	playersingame	integer
 --
 -- GIC1: There can be no more than 6 players in a game
 CONSTRAINT GIC1 CHECK (playersingame <= 6),
 );
 --
 CREATE TABLE properties (
-	propertyname
-	mortgagevalue
-	rentperhouse
-	price
-	renthouseprice
-	location
+	propertyname	char,
+	mortgagevalue	integer,
+	rentperhouse	integer,
+	price		integer,
+	renthouseprice	integer,
+	location	char,
 );
 --
 CREATE TABLE special_properties (
 	location	
-	rent		number,
-	price		number,
+	rent		integer,
+	price		integer,
 	propertype
 --
 -- SPIC1: If type is utilities the price can't be more than $250
@@ -66,8 +66,8 @@ CONSTRAINT SPIC1 CHECK (NOT(type = "utilities" AND price > 250),
 );
 --
 CREATE TABLE special_spaces (
-	locationnumber
-	spacetype
+	locationnumber	integer,
+	spacetype	char,
 );
 --
 CREATE TABLE plays (
@@ -76,8 +76,8 @@ CREATE TABLE plays (
 --
 CREATE TABLE rent (
 	primary key (
-		username
-		rentamt number)
+		username,
+		rentamt integer),\
 );
 
 --
@@ -108,7 +108,7 @@ COMMIT;
 
 --< The SQL queries>. Include the following for each query:
 --1. A comment line stating the query number and the feature(s) it demonstrates
---(e.g. – Q25 – correlated subquery).
+--(e.g. â€“ Q25 â€“ correlated subquery).
 --2. A comment line stating the query in English.
 --3. The SQL code for the query.
 
