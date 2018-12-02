@@ -2,7 +2,10 @@ SPOOL project.out
 SET ECHO ON
 /*
 CIS 353 - Database Design Project
-<One line per team member name>
+Devin Monday
+Kyle VanDenHeuvel
+Nathan VandenHoek
+Samuel Ventocilla
 */
 
 --< The SQL/DDL code that creates your schema >
@@ -27,12 +30,20 @@ CREATE TABLE players (
 	password
 	firstname	char(),
 	lastname	char()
+--
+-- PlIC1: All players must have a unique username
+CONSTRAINT PlIC1 UNIQUE (username),
+-- PRIC1: The property name is the foreign key for the player
+-- FIXME 
 );
 --
 CREATE TABLE game (
 	gameID
 	gamerules
 	playersingame
+--
+-- GIC1: There can be no more than 6 players in a game
+CONSTRAINT GIC1 CHECK (playersingame <= 6),
 );
 --
 CREATE TABLE properties (
@@ -49,6 +60,9 @@ CREATE TABLE special_properties (
 	rent		number,
 	price		number,
 	propertype
+--
+-- SPIC1: If type is utilities the price can't be more than $250
+CONSTRAINT SPIC1 CHECK (NOT(type = "utilities" AND price > 250),
 );
 --
 CREATE TABLE special_spaces (
@@ -65,6 +79,21 @@ CREATE TABLE rent (
 		username
 		rentamt number)
 );
+
+--
+-- Add foreign keys:
+ALTER TABLE properties
+ADD FOREIGN KEY (location) references special_properties(location)
+Deferrable initially deferred;
+ALTER TABLE plays
+ADD FOREIGN KEY (username) references players(location)
+Deferrable initially deferred;
+ALTER TABLE plays
+ADD FOREIGN KEY (gameID) references game(gameID)
+Deferrable initially deferred;
+ALTER TABLE special_properties
+ADD FOREIGN KEY (location) references rent(location)
+Deferrable initially deferred;
 
 SET FEEDBACK OFF
 
